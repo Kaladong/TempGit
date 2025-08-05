@@ -1,0 +1,601 @@
+openapi: 3.0.0
+info:
+  title: OpenAI Assistants API
+  version: 1.0.0
+  description: A complete OpenAPI specification for the core functions of the OpenAI Assistants API.
+servers:
+  - url: https://api.openai.com/v1
+paths:
+  /assistants:
+    post:
+      summary: Create an Assistant
+      operationId: createAssistant
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssistantRequest'
+      responses:
+        '200':
+          description: A successful response with the created Assistant object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssistantObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      summary: List Assistants
+      operationId: listAssistants
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+      responses:
+        '200':
+          description: A successful response with a list of Assistant objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /assistants/{assistant_id}:
+    get:
+      summary: Retrieve an Assistant
+      operationId: retrieveAssistant
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+        - in: path
+          name: assistant_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the assistant to retrieve.
+      responses:
+        '200':
+          description: A successful response with the Assistant object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssistantObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Modify an Assistant
+      operationId: modifyAssistant
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+        - in: path
+          name: assistant_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the assistant to modify.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssistantRequest'
+      responses:
+        '200':
+          description: A successful response with the modified Assistant object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssistantObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      summary: Delete an Assistant
+      operationId: deleteAssistant
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+        - in: path
+          name: assistant_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the assistant to delete.
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: asst_abc123
+                  deleted:
+                    type: boolean
+                    example: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /threads:
+    post:
+      summary: Create a Thread
+      operationId: createThread
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+      responses:
+        '200':
+          description: A successful response with the created Thread object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /threads/{thread_id}:
+    get:
+      summary: Retrieve a Thread
+      operationId: retrieveThread
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+        - in: path
+          name: thread_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the thread to retrieve.
+      responses:
+        '200':
+          description: A successful response with the Thread object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Modify a Thread
+      operationId: modifyThread
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+        - in: path
+          name: thread_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the thread to modify.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+      responses:
+        '200':
+          description: A successful response with the modified Thread object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      summary: Delete a Thread
+      operationId: deleteThread
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+        - in: path
+          name: thread_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the thread to delete.
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: thread_abc123
+                  deleted:
+                    type: boolean
+                    example: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /threads/{thread_id}/messages:
+    post:
+      summary: Create a Message in a Thread
+      operationId: createMessage
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+        - in: path
+          name: thread_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the thread to which the message will be added.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageRequest'
+      responses:
+        '200':
+          description: A successful response with the created Message object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      summary: List Messages in a Thread
+      operationId: listMessages
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+        - in: path
+          name: thread_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the thread to list messages from.
+      responses:
+        '200':
+          description: A successful response with a list of Message objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /threads/{thread_id}/runs:
+    post:
+      summary: Create a Run
+      operationId: createRun
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+        - in: path
+          name: thread_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the thread to run.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunRequest'
+      responses:
+        '200':
+          description: A successful response with the created Run object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      summary: List Runs in a Thread
+      operationId: listRuns
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+        - in: path
+          name: thread_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the thread to list runs from.
+      responses:
+        '200':
+          description: A successful response with a list of Run objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /threads/{thread_id}/runs/{run_id}:
+    get:
+      summary: Retrieve a Run
+      operationId: retrieveRun
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+        - in: path
+          name: thread_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the thread that belongs to the run.
+        - in: path
+          name: run_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the run to retrieve.
+      responses:
+        '200':
+          description: A successful response with the Run object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Cancel a Run
+      operationId: cancelRun
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+        - in: path
+          name: thread_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the thread that belongs to the run.
+        - in: path
+          name: run_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the run to cancel.
+      responses:
+        '200':
+          description: A successful response with the cancelled Run object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /threads/{thread_id}/runs/{run_id}/steps:
+    get:
+      summary: List Run Steps
+      operationId: listRunSteps
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/OpenAIBetaHeader'
+        - in: path
+          name: thread_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the thread that belongs to the run.
+        - in: path
+          name: run_id
+          required: true
+          schema:
+            type: string
+          description: The ID of the run to retrieve steps from.
+      responses:
+        '200':
+          description: A successful response with a list of Run Step objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    OpenAIBetaHeader:
+      in: header
+      name: OpenAI-Beta
+      required: true
+      schema:
+        type: string
+        example: assistants=v2
+  responses:
+    Unauthorized:
+      description: Unauthorized. Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid API key provided.
+  schemas:
+    AssistantRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          description: The model to be used by the assistant.
+          example: gpt-4o
+        name:
+          type: string
+          description: The name of the assistant.
+          example: My AI Assistant
+        description:
+          type: string
+          description: The description of the assistant.
+          example: An AI assistant for customer support.
+        instructions:
+          type: string
+          description: The instructions for the assistant.
+          example: You are a helpful assistant.
+        tools:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: code_interpreter
+    AssistantObject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: asst_abc123
+        object:
+          type: string
+          example: assistant
+        created_at:
+          type: integer
+          example: 1722830400
+        name:
+          type: string
+          example: My AI Assistant
+        model:
+          type: string
+          example: gpt-4o
+    ThreadObject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: thread_abc123
+        object:
+          type: string
+          example: thread
+        created_at:
+          type: integer
+          example: 1722830400
+    MessageRequest:
+      type: object
+      properties:
+        role:
+          type: string
+          description: The role of the message.
+          example: user
+        content:
+          type: string
+          description: The content of the message.
+          example: What is the capital of France?
+    MessageObject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: msg_abc123
+        object:
+          type: string
+          example: thread.message
+        created_at:
+          type: integer
+          example: 1722830400
+        thread_id:
+          type: string
+          example: thread_abc123
+        role:
+          type: string
+          example: user
+        content:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: text
+              text:
+                type: object
+                properties:
+                  value:
+                    type: string
+                    example: What is the capital of France?
+    RunRequest:
+      type: object
+      properties:
+        assistant_id:
+          type: string
+          description: The ID of the assistant to use.
+          example: asst_abc123
+        instructions:
+          type: string
+          description: Instructions for the run.
+          example: Please answer the user's question.
+    RunObject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: run_abc123
+        object:
+          type: string
+          example: thread.run
+        created_at:
+          type: integer
+          example: 1722830400
+        thread_id:
+          type: string
+          example: thread_abc123
+        assistant_id:
+          type: string
+          example: asst_abc123
+        status:
+          type: string
+          example: completed
+    ListResponse:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items: {}
+        first_id:
+          type: string
+        last_id:
+          type: string
+        has_more:
+          type: boolean
+          example: false
