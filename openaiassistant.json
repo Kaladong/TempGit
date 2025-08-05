@@ -35,7 +35,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "body",
@@ -71,7 +75,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           }
         ],
         "responses": {
@@ -101,7 +109,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "path",
@@ -139,7 +151,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "path",
@@ -182,7 +198,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "path",
@@ -229,7 +249,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           }
         ],
         "responses": {
@@ -259,7 +283,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "path",
@@ -297,7 +325,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "path",
@@ -348,7 +380,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "path",
@@ -398,7 +434,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "path",
@@ -441,7 +481,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "path",
@@ -481,7 +525,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "path",
@@ -524,7 +572,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "path",
@@ -561,7 +613,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "path",
@@ -603,7 +659,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "path",
@@ -647,7 +707,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OpenAIBetaHeader"
+            "name": "OpenAI-Beta",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "OpenAI-Beta header with assistants=v2 value."
           },
           {
             "in": "path",
@@ -676,16 +740,6 @@
           }
         }
       }
-    }
-  },
-  "parameters": {
-    "OpenAIBetaHeader": {
-      "in": "header",
-      "name": "OpenAI-Beta",
-      "required": true,
-      "type": "string",
-      "description": "OpenAI-Beta header with assistants=v2 value.",
-      "x-example": "assistants=v2"
     }
   },
   "responses": {
@@ -901,7 +955,9 @@
         },
         "data": {
           "type": "array",
-          "items": {}
+          "items": {
+            "type": "object"
+          }
         },
         "first_id": {
           "type": "string"
@@ -915,5 +971,11 @@
         }
       }
     }
-  }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
 }
